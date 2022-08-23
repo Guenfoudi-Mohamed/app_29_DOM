@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>app_29</title>
+        <meta name="viewport" content="width=device-width, initiale-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="app_29.css" type="text/css">
+    </head>
+    <body>
+        <div id="container">
+            <div class="wrapper">
+                <!-- header Buttons -->
+                <div class="headerButtons">
+                    <input type="button" value="add Account" title="add Account" class="btnAddAccount">
+                    <div class="archives-trach-button">
+                        <input type="button"  value="Archives" title="Archives" class="btnArchives"><input type="button" title="Trach" value="Trach" class="btnTrach">
+                    </div>
+                </div>
+                <!-- account Filter -->
+                <div class="accountFilter">
+                    <div class="logoCustomize"><a class="sliderControle" title="Customize"><i class="fa-solid fa-sliders"></i></a><label>Customize</label></div>
+                    <ul class="filterBoxs">
+                        <li class="box b0">account type</li>
+                        <li class="box b1">created date</li>
+                        <li class="box b2">name filter</li>
+                        <li class="box b3">price</li>
+                    </ul>
+                </div>
+                <!-- box account -->
+                <div class="accountBox">
+                    <!-- boxPerson0 -->
+                    <!-- <div class="boxPerson">
+                        <div class="headerPerson">
+                            <img src="images/user.png" alt="person profile">
+                            <div class="infoPerson">
+                                <h4>Mohamed Guenfoudi</h4>
+                                <span>Member ship</span><i class="fa-solid fa-circle-check"></i>
+                            </div>
+                        </div>
+                        <div class="discriptionPerson">
+                            <span class="titleProduct">title Product</span>
+                            <span class="departmentType">Department Type</span>
+                            <p class="info">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>
+                        </div>
+                        <div class="buttonEditePerson">
+                            <div class="archives-trach-button">
+                                <input type="button" title="Archive" class="btnArchive"  value="Archive"><input type="button" title="Delete" class="btnDelete" value="Delete">
+                            </div>
+                            <input type="button" title="Edite" class="btnEdite" value="Edite">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- popUpAddAccount -->
+            <div class="popUpAddAccount">
+                <div class="form">
+                    <a class="closePopUpAddAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
+                    <input type="text" placeholder="First Name">
+                    <input type="text" placeholder="Last Name">
+                    <input type="file" >
+                    <select class="slc s0">
+                        <option selected disabled>Choose here</option>
+                    </select>
+                    <select class="slc s1">
+                        <option selected disabled>Choose here</option>
+                    </select>
+                    <input type="button" class="btnEnvoyer" title="Envoyer" value="Envoyer">
+                </div>
+            </div>
+        </div>
+
+        <script src="btnAddAccount&closePopUpAddAccount.js" type="text/Javascript"></script>
+    </body>
+</html> 

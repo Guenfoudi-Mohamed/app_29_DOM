@@ -1,0 +1,47 @@
+@charset "utf-8";
+*{margin: 0px;padding: 0px;outline: none;text-decoration: none;list-style: none;box-sizing: border-box;}
+:is(::after,::before){margin: 0px;padding: 0px;box-sizing: border-box;}
+/* :root{--widthCircle:80px;--leftMove:0px;--topMove:0px;} */
+html, body{height: 100%;font-family: Arial, Helvetica, sans-serif;}
+body #container{width: 100%;height:inherit;}
+/* start headerButtons */
+body #container .wrapper{width: 100%;height:inherit;max-width: 1200px;margin: 0px auto;padding-top: 50px;}
+body #container .wrapper .headerButtons{display: flex;margin-bottom: 50px;}
+body #container .wrapper .headerButtons .archives-trach-button{margin-left:auto;}
+body #container .wrapper .headerButtons input.btnAddAccount{background-color: rgb(52,73,94);}
+body #container .wrapper .headerButtons :is(input.btnAddAccount, .archives-trach-button input){color: #fff;padding: 10px 20px;font-size: 18px;border: none;border-radius: 5px;cursor: pointer;}
+body #container .wrapper .headerButtons .archives-trach-button .btnArchives{background-color: rgb(27,188,155);}
+body #container .wrapper .headerButtons .archives-trach-button .btnTrach{background-color: rgb(232,76,61);margin-left: 20px;}
+/* start accountFilter */
+body #container .wrapper .accountFilter .logoCustomize{display: flex;align-items: center;}
+body #container .wrapper .accountFilter .logoCustomize .sliderControle{color: #000;border: 2px solid #000;border-radius:5px;padding:0px 2.5px;font-weight: bold;font-size: 17px;margin-right: 5px;cursor: pointer;}
+body #container .wrapper .accountFilter .filterBoxs{display: flex;gap:33.34px;align-items: center;justify-content: center;flex-wrap: wrap; margin: 15px 0px 45px 0px;}
+body #container .wrapper .accountFilter .filterBoxs .box{background-color:rgb(236,240,241);color: rgb(74, 74, 74);font-size: 18px; padding: 5px 0px 5px 15px;border-radius: 5px;min-width: 275px;}
+/* start accountBox */
+body #container .wrapper .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 30px;}
+body #container .wrapper .accountBox .boxPerson{max-width: 275px;}
+    /* start headerPerson */
+body #container .wrapper .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: space-between; background-color:rgb(236,240,241);border-radius: 7px;}
+body #container .wrapper .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
+body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson h3{margin-top: 5px;}
+body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson span{margin-right:5px;color: orange;}
+    /* start discriptionPerson */
+body #container .wrapper .accountBox .boxPerson .discriptionPerson{margin: 15px 0px;background-color: rgb(52,73,94);padding: 15px;border-radius: 7px;}
+body #container .wrapper .accountBox .boxPerson .discriptionPerson :is(.titleProduct, .info){color: #fff;}
+body #container .wrapper .accountBox .boxPerson .discriptionPerson .departmentType{margin: 5px 0px;color: green;display: block;}
+    /* start discriptionPerson */
+body #container .wrapper .accountBox .boxPerson .buttonEditePerson :is(.archives-trach-button input, .archives-trach-button + .btnEdite){color: #fff;border: none;border-radius: 7px;padding: 10px;font-weight: bold;cursor: pointer;}    
+body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-trach-button input{width: 48%;}
+body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-trach-button .btnArchive{background-color: rgb(53,152,219);}
+body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-trach-button .btnDelete{background-color: rgb(27,188,155);float: right;}
+body #container .wrapper .accountBox .boxPerson .buttonEditePerson .btnEdite{background-color: orange;width: 100%;margin-top: 10px;}
+
+body .popUpAddAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .4);display: none;}
+body .popUpAddAccount.active{display:flex;}
+body .popUpAddAccount .form{margin: auto;max-width: 300px;background-color:rgb(52,73,94);padding: 15px;position: relative;}
+body .popUpAddAccount .form .closePopUpAddAccount{position: absolute;font-size: 20px;top: 0px;right:-25px;color: #fff;cursor: pointer;}
+body .popUpAddAccount .form .closePopUpAddAccount i{display: block;}
+body .popUpAddAccount .form :is(input, select){border: none;border-radius: 3px;}
+body .popUpAddAccount .form input{display: block;width: 100%;padding: 5px;margin-top: 15px;}
+body .popUpAddAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;}
+body .popUpAddAccount .form .btnEnvoyer{cursor: pointer;background-color: rgb(27,188,155);}
