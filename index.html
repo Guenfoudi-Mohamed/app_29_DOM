@@ -30,7 +30,7 @@
                 <!-- box account -->
                 <div class="accountBox">
                     <!-- boxPerson0 -->
-                    <!-- <div class="boxPerson">
+                    <div class="boxPerson">
                         <div class="headerPerson">
                             <img src="images/user.png" alt="person profile">
                             <div class="infoPerson">
@@ -49,7 +49,7 @@
                             </div>
                             <input type="button" title="Edite" class="btnEdite" value="Edite">
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <!-- popUpAddAccount -->
@@ -58,7 +58,15 @@
                     <a class="closePopUpAddAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
                     <input type="text" placeholder="First Name">
                     <input type="text" placeholder="Last Name">
-                    <input type="file" >
+                    <div class="uploadProfile" title="upload">
+                        <div class="imgUpload">
+                            <a href="#" class="linkUpload l0"><i class="fa fa-2x fa-camera"></i></a>
+                            <img src="" class="img">
+                            <a href="#" class="linkUpload l1"><i class="fa fa-2x fa-camera"></i></a>
+                            <input type="file" accept="image/*" required class="inpFile">
+                        </div>
+                        <label >upload profile picture</label>
+                    </div>
                     <select class="slc s0">
                         <option selected disabled>Choose here</option>
                     </select>
@@ -71,5 +79,6 @@
         </div>
 
         <script src="btnAddAccount&closePopUpAddAccount.js" type="text/Javascript"></script>
+        <script src="form_Event.js" type="text/Javascript"></script>
     </body>
 </html> 
