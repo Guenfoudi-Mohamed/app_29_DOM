@@ -21,14 +21,16 @@ body #container .wrapper .accountFilter .filterBoxs .box{background-color:rgb(23
 body #container .wrapper .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 30px;}
 body #container .wrapper .accountBox .boxPerson{max-width: 275px;}
     /* start headerPerson */
-body #container .wrapper .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: space-between; background-color:rgb(236,240,241);border-radius: 7px;}
+body #container .wrapper .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: flex-start; background-color:rgb(236,240,241);border-radius: 7px;}
 body #container .wrapper .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
-body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson h3{margin-top: 5px;}
+body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson{margin-left: 30px;}
+body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson h5{margin-top: 5px;}
 body #container .wrapper .accountBox .boxPerson .headerPerson .infoPerson span{margin-right:5px;color: orange;}
     /* start discriptionPerson */
-body #container .wrapper .accountBox .boxPerson .discriptionPerson{margin: 15px 0px;background-color: rgb(52,73,94);padding: 15px;border-radius: 7px;}
+body #container .wrapper .accountBox .boxPerson .discriptionPerson{margin: 15px 0px;background-color: rgb(52,73,94);padding: 15px;border-radius: 7px;min-height: 220px;max-height: 220px;}
 body #container .wrapper .accountBox .boxPerson .discriptionPerson :is(.titleProduct, .info){color: #fff;}
 body #container .wrapper .accountBox .boxPerson .discriptionPerson .departmentType{margin: 5px 0px;color: green;display: block;}
+body #container .wrapper .accountBox .boxPerson .discriptionPerson .info{overflow: hidden;text-overflow: ellipsis;}
     /* start discriptionPerson */
 body #container .wrapper .accountBox .boxPerson .buttonEditePerson :is(.archives-trach-button input, .archives-trach-button + .btnEdite){color: #fff;border: none;border-radius: 7px;padding: 10px;font-weight: bold;cursor: pointer;}    
 body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-trach-button input{width: 48%;}
@@ -39,7 +41,7 @@ body #container .wrapper .accountBox .boxPerson .buttonEditePerson .btnEdite{bac
 body .popUpAddAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .4);display: none;}
 body .popUpAddAccount.active{display:flex;}
     /* start form */
-body .popUpAddAccount .form{margin: auto;max-width: 300px;background-color:rgb(52,73,94);padding:30px 15px;position: relative;}
+body .popUpAddAccount .form{margin: auto;width: 270px;background-color:rgb(52,73,94);padding:30px 15px;position: relative;}
 body .popUpAddAccount .form .closePopUpAddAccount{position: absolute;font-size: 20px;top: 0px;right:-25px;color: #fff;cursor: pointer;}
 body .popUpAddAccount .form .closePopUpAddAccount i{display: block;}
 body .popUpAddAccount .form :is(input, select){border: none;border-radius: 3px;}
@@ -55,5 +57,6 @@ body .popUpAddAccount .form .uploadProfile .imgUpload:hover .linkUpload.l1{opaci
 body .popUpAddAccount .form .uploadProfile .imgUpload .img{width: 102%;height: 102%;position: absolute;top: -1px;left:-1px;object-fit: cover;}
 body .popUpAddAccount .form .uploadProfile .imgUpload + label{font-size: 15px;color: #fff;width: 50%;text-align: center;}
 body .popUpAddAccount .form > input{display: block;width: 100%;padding: 5px;margin-top: 15px;}
-body .popUpAddAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;}
+body .popUpAddAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;background-color: #fff;}
+body .popUpAddAccount .form textarea{resize: none;width: 100%;max-height: 60px;margin-top: 15px;padding: 5px;text-indent: 15px;}
 body .popUpAddAccount .form .btnEnvoyer{cursor: pointer;background-color: rgb(27,188,155);}
