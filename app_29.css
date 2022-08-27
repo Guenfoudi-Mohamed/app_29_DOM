@@ -19,7 +19,7 @@ body #container .wrapper .accountFilter .filterBoxs{display: flex;gap:33.34px;al
 body #container .wrapper .accountFilter .filterBoxs .box{background-color:rgb(236,240,241);color: rgb(74, 74, 74);font-size: 18px; padding: 5px 0px 5px 15px;border-radius: 5px;min-width: 275px;}
 /* start accountBox */
 body #container .wrapper .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 30px;}
-body #container .wrapper .accountBox .boxPerson{max-width: 275px;}
+body #container .wrapper .accountBox .boxPerson{max-width: 275px;width: 100%;}
     /* start headerPerson */
 body #container .wrapper .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: flex-start; background-color:rgb(236,240,241);border-radius: 7px;}
 body #container .wrapper .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
@@ -59,4 +59,4 @@ body .popUpAddAccount .form .uploadProfile .imgUpload + label{font-size: 15px;co
 body .popUpAddAccount .form > input{display: block;width: 100%;padding: 5px;margin-top: 15px;}
 body .popUpAddAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;background-color: #fff;}
 body .popUpAddAccount .form textarea{resize: none;width: 100%;max-height: 60px;margin-top: 15px;padding: 5px;text-indent: 15px;}
-body .popUpAddAccount .form .btnEnvoyer{cursor: pointer;background-color: rgb(27,188,155);}
+body .popUpAddAccount .form input:last-child{cursor: pointer;background-color: rgb(27,188,155);}
