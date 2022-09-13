@@ -13,8 +13,8 @@
                 <!-- header Buttons -->
                 <div class="headerButtons">
                     <input type="button" value="add Account" title="add Account" class="btnAddAccount">
-                    <div class="archives-trach-button">
-                        <input type="button"  value="Archives" title="Archives" class="btnArchives"><input type="button" title="Trach" value="Trach" class="btnTrach">
+                    <div class="archives-Trash-button">
+                        <input type="button"  value="Archives" title="Archives" class="btnArchives"><input type="button" title="Trash" value="Trash" class="btnTrash">
                     </div>
                 </div>
                 <!-- account Filter -->
@@ -34,17 +34,17 @@
                         <div class="headerPerson">
                             <img src="images/user.png" alt="person profile">
                             <div class="infoPerson">
-                                <h5>Mohamed Guenfoudi</h5>
+                                <h5>Mohamed Guenfoudi</h5> 
                                 <span>Member ship</span><i class="fa-solid fa-circle-check"></i>
                             </div>
                         </div>
                         <div class="discriptionPerson">
                             <span class="titleProduct">title Product</span>
-                            <span class="departmentType">Department Type</span>
+                            <span class="departmentType">Department Type</span> 
                             <p class="info">Lorem Ipsum is simply dummy text of the printing and typesetting standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>
                         </div>
                         <div class="buttonEditePerson">
-                            <div class="archives-trach-button">
+                            <div class="archives-Trash-button">
                                 <input type="button" title="Archive" class="btnArchive"  value="Archive"><input type="button" title="Delete" class="btnDelete" value="Delete">
                             </div>
                             <input type="button" title="Edite" class="btnEdite" value="Edite">
@@ -53,10 +53,10 @@
                 </div>
             </div>
             <!-- popUpAddAccount -->
-            <div class="popUpAddAccount">
+            <div class="popUp popUpAddAccount">
                 <div class="form">
                     <a class="closePopUpAddAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
-                    <input type="text" placeholder="First Name" class="firstName" autofocus>
+                    <input type="text" placeholder="First Name" class="firstName" focus autofocus>
                     <input type="text" placeholder="Last Name" class="lastName">
                     <div class="uploadProfile" title="upload">
                         <div class="imgUpload">
@@ -83,14 +83,14 @@
                         <option>frontend developer</option>
                         <option>backend developer</option>
                     </select>
-                    <textarea placeholder="description" class="textArea" class="textArea" maxlength="200"></textarea>
-                    <input type="button" class="btnEnvoyer" title="Envoyer" value="Envoyer">
+                    <textarea placeholder="description"  class="textArea" maxlength="200"></textarea>
+                    <input type="button" class="btnCreate" title="Create" value="Create">
                 </div>
             </div>
             <!-- popUpAddAccount -->
-            <div class="popUpAddAccount Update">
+            <div class="popUp popUpUpdateAccount">
                 <div class="form">
-                    <a class="closePopUpAddAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
+                    <a class="closePopUpUpdateAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
                     <input type="text" placeholder="First Name" class="firstName" autofocus>
                     <input type="text" placeholder="Last Name" class="lastName">
                     <div class="uploadProfile" title="upload">
@@ -118,13 +118,29 @@
                         <option>frontend developer</option>
                         <option>backend developer</option>
                     </select>
-                    <textarea placeholder="description" class="textArea" class="textArea" maxlength="200"></textarea>
+                    <textarea placeholder="description" class="textArea" maxlength="200"></textarea>
                     <input type="button" class="btnSave" title="Envoyer" value="Save">
                 </div>
             </div>
+            <!-- area Archives -->
+            <div class="areaArchives active">
+                <div class="wrapper" data-text="Archives">
+                    <a class="close-area-archives" title="Close area Archives"><i class="fa-solid fa-xmark"></i></a>
+                    <div class="accountBox"></div>
+                </div>
+            </div>
+            <!-- area trash -->
+            <div class="areaTrash active">
+                <div class="wrapper" data-text="Trash">
+                    <a class="close-area-trash" title="Close area trash"><i class="fa-solid fa-xmark"></i></a>
+                    <div class="accountBox"></div>
+                </div>
+            </div>
         </div>
-
-        <script src="btnAddAccount&closePopUpAddAccount.js" type="text/Javascript"></script>
-        <script src="form_Event.js" type="text/Javascript"></script>
+        
+        <script src="clear-data-from-formAddAccount-&&-setMatriculeUserObj.js"></script>
+        <script src="display-PopUp-addAccount-Archive-Trash.js"></script>
+        <script src="class-userObj-userObjUI-userObjUIArchive-userObjUITrash.js"></script>
+        <script src="event-input-save-formUpDateAccount&event-input-Create-formAddAccount&event-DOMContentLoaded.js"></script>
     </body>
 </html> 
