@@ -4,6 +4,7 @@
 // function clear data from formAddAccount
 function clearDataForm(){
     const popUp = document.querySelectorAll('body #container .popUp');
+
     const img = document.querySelector('body #container .popUp .form .uploadProfile .imgUpload .img');
     const selects = document.querySelectorAll('body #container .popUp .form select');
     const textArea = document.querySelector('body #container .popUp .form .textArea');
@@ -18,6 +19,8 @@ function clearDataForm(){
         selects[i].selectedIndex = 0;
     }
     textArea.value = '';
+    const inpUserName = document.querySelector('body #container .popUpAddAccount .form .userName');
+    inpUserName.removeAttribute('style');
 }
 
 // function setMatriculeUserObj
