@@ -70,3 +70,17 @@ closeAreaTrash.onclick = function(){
     const areaTrash = document.querySelector('body #container .areaTrash');
     areaTrash.classList.add('active');
 } 
+
+// event for display filterBoxs
+const sliderControle = document.querySelector('body #container .wrapper .accountFilter .logoCustomize');
+sliderControle.onclick = function(){
+    const filterBoxs = document.querySelector('body #container .wrapper .accountFilter .filterBoxs');
+    filterBoxs.classList.remove('active');
+}
+
+
+const closeAreaFilter = document.querySelector('body #container .areaFilter > .wrapper .close-area-filter');
+closeAreaFilter.onclick = function(){
+    const areaFilter = document.querySelector('body #container .areaFilter');
+    areaFilter.classList.add('active');
+}
