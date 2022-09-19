@@ -2,28 +2,43 @@
 
 
 // class userObj
-class userObj{
+class userObj{    
     static matriculeArr = [];
-    constructor(firstname,lastname,imgSrc,selectMembership,selectJob,titleProduct,selectDepartmentype,discription,matricule){
+    static userNameArr = [];
+    constructor(firstname,lastname,userName,imgSrc,selectMembership,selectJob,titleProduct,price,selectDepartmentype,discription,matricule,dateAndTimeCreate){
         this.firstname = firstname;
         this.lastname = lastname;
+        this.userName = userName;
         this.imgSrc = imgSrc;
         this.selectMembership = selectMembership;
         this.selectJob = selectJob;
         this.titleProduct = titleProduct;
+        this.price = price;
         this.selectDepartmentype = selectDepartmentype;
         this.discription = discription;
         this.matricule = matricule;
+        this.dateAndTimeCreate = dateAndTimeCreate;
+
         userObjUI.arrUserObj.push(this);
+
         const jsonArrobj = JSON.stringify(userObjUI.arrUserObj);
         localStorage.setItem('arrUserObj',jsonArrobj);
+        
         userObj.matriculeArr.push(this.matricule);
         localStorage.setItem('matriculeArr',JSON.stringify(userObj.matriculeArr));
+        userObj.userNameArr.push(this.userName);
+        localStorage.setItem('userNameArr',JSON.stringify(userObj.userNameArr));
+        
         userObjUI.displayUserObj(this);
     }
     static matriculeOBJ = function(){
         if(localStorage.getItem('matriculeArr') != null){
             userObj.matriculeArr = JSON.parse(localStorage.getItem('matriculeArr'));
+        }
+    }
+    static userNameOBJ = function(){
+        if(localStorage.getItem('userNameArr') != null){
+            userObj.userNameArr = JSON.parse(localStorage.getItem('userNameArr'));
         }
     }
 }
@@ -88,11 +103,24 @@ class userObjUI{
             document.querySelector('body #container .popUpUpdateAccount .form select.s0').value = obj.selectMembership;
             document.querySelector('body #container .popUpUpdateAccount .form select.s1').value = obj.selectJob;
             document.querySelector('body #container .popUpUpdateAccount .form input.titleProduct').value = obj.titleProduct;
+            document.querySelector('body #container .popUpUpdateAccount .form input.price').value = obj.price.slice(0,obj.price.length-1);
             document.querySelector('body #container .popUpUpdateAccount .form select.s2').value = obj.selectDepartmentype;
             document.querySelector('body #container .popUpUpdateAccount .form textarea').value = obj.discription;
             const btnSave = document.querySelector('body #container .popUpUpdateAccount .form .btnSave');
             btnSave.matricule = obj.matricule;
             btnSave.parentelement = element.parentElement.className;
+            if(btnSave.parentelement == 'accountBox Filter'){
+                btnSave.parentelement = 'accountBox Home';
+            }
+            btnSave.dateAndTimeCreate = obj.dateAndTimeCreate;
+            btnSave.userName = obj.userName;
+            
+            // const popUpAreaFilter = document.querySelector('body #container .areaFilter');
+            // if(popUpAreaFilter.classList.contains('active') == false){
+            //     popUpAreaFilter.classList.add('active');
+            //     popUpAreaFilter.setAttribute('isAcive','false');
+            // }
+            
         });
     }
     static upDateArrUserObj = function(selfMatricule,self){
@@ -114,6 +142,7 @@ class userObjUI{
             [userObjUI.arrUserObj[i-1] , userObjUI.arrUserObj[i]] = [userObjUI.arrUserObj[i] , userObjUI.arrUserObj[i-1]];
         }
         localStorage.setItem('arrUserObj',JSON.stringify(userObjUI.arrUserObj)); 
+
     }
     static archiveUserObj = function(btnArchive,selfMatricule){
         btnArchive.addEventListener('click',function(){
@@ -144,7 +173,10 @@ class userObjUI{
             userObjUIArchive.arrUserObjArchive.push(stockObj);
             const arrUserObjArchive = JSON.stringify(userObjUIArchive.arrUserObjArchive);
             localStorage.setItem('arrUserObjArchive',arrUserObjArchive);
-            userObjUIArchive.displayUserObjArchive(stockObj);      
+            userObjUIArchive.displayUserObjArchive(stockObj); 
+            
+            userObjUIFilter.userObjFilter();
+            userObjUIFilter.makeSure();
         });
     }
     static deleteUserObj = function(btnDelete,selfMatricule){
@@ -176,7 +208,10 @@ class userObjUI{
             userObjUITrash.arrUserObjTrash.push(stockObj);
             const arrUserObjTrash = JSON.stringify(userObjUITrash.arrUserObjTrash);
             localStorage.setItem('arrUserObjTrash',arrUserObjTrash);
-            userObjUITrash.displayUserObjTrash(stockObj);   
+            userObjUITrash.displayUserObjTrash(stockObj);
+            
+            userObjUIFilter.userObjFilter();
+            userObjUIFilter.makeSure();   
         });
     }
 }
@@ -240,11 +275,17 @@ class userObjUIArchive{
             document.querySelector('body #container .popUpUpdateAccount .form select.s0').value = obj.selectMembership;
             document.querySelector('body #container .popUpUpdateAccount .form select.s1').value = obj.selectJob;
             document.querySelector('body #container .popUpUpdateAccount .form input.titleProduct').value = obj.titleProduct;
+            document.querySelector('body #container .popUpUpdateAccount .form input.price').value = obj.price.slice(0,obj.price.length-1);
             document.querySelector('body #container .popUpUpdateAccount .form select.s2').value = obj.selectDepartmentype;
             document.querySelector('body #container .popUpUpdateAccount .form textarea').value = obj.discription;
             const btnSave = document.querySelector('body #container .popUpUpdateAccount .form .btnSave');
             btnSave.matricule = obj.matricule;
-            btnSave.parentelement = element.parentElement.parentElement.parentElement.className;
+            btnSave.parentelement = element.parentElement.className;
+            if(btnSave.parentelement == 'accountBox Filter'){
+                btnSave.parentelement = 'accountBox Archives';
+            }
+            btnSave.dateAndTimeCreate = obj.dateAndTimeCreate;
+            btnSave.userName = obj.userName;
 
         });
     }
@@ -266,8 +307,13 @@ class userObjUIArchive{
         for(let i = userObjUIArchive.arrUserObjArchive.length-1 ;i > index;i--){
             [userObjUIArchive.arrUserObjArchive[i-1] , userObjUIArchive.arrUserObjArchive[i]] = [userObjUIArchive.arrUserObjArchive[i] , userObjUIArchive.arrUserObjArchive[i-1]];
         }
-        localStorage.setItem('arrUserObjArchive',JSON.stringify(userObjUIArchive.arrUserObjArchive)); 
-        btnArchives.click();
+        localStorage.setItem('arrUserObjArchive',JSON.stringify(userObjUIArchive.arrUserObjArchive));
+        
+        const popUpAreaFilter = document.querySelector('body #container .areaFilter');
+        if(popUpAreaFilter.classList.contains('active')){
+            btnArchives.click();
+        };
+        
     }
     static moveUserObjHome = function(btnHome,selfMatricule){
         btnHome.addEventListener('click',function(){
@@ -298,8 +344,13 @@ class userObjUIArchive{
             userObjUI.arrUserObj.push(stockObj);
             const arrUserObj = JSON.stringify(userObjUI.arrUserObj);
             localStorage.setItem('arrUserObj',arrUserObj);
-            userObjUI.displayUserObj(stockObj);  
+            userObjUI.displayUserObj(stockObj);
+
+            userObjUIFilter.userObjFilter();
+            userObjUIFilter.makeSure();
         });
+        
+        
     }
     static moveUserObjTrash = function(btnDelete,selfMatricule){
         btnDelete.addEventListener('click',function(){
@@ -330,7 +381,10 @@ class userObjUIArchive{
             userObjUITrash.arrUserObjTrash.push(stockObj);
             const arrUserObj = JSON.stringify(userObjUITrash.arrUserObjTrash);
             localStorage.setItem('arrUserObjTrash',arrUserObj);
-            userObjUITrash.displayUserObjTrash(stockObj);  
+            userObjUITrash.displayUserObjTrash(stockObj); 
+            
+            userObjUIFilter.userObjFilter();
+            userObjUIFilter.makeSure(); 
         });
     }
 }
@@ -403,7 +457,10 @@ class userObjUITrash{
             userObjUI.arrUserObj.push(stockObj);
             const arrUserObj = JSON.stringify(userObjUI.arrUserObj);
             localStorage.setItem('arrUserObj',arrUserObj);
-            userObjUI.displayUserObj(stockObj);  
+            userObjUI.displayUserObj(stockObj);
+
+            userObjUIFilter.userObjFilter();
+            userObjUIFilter.makeSure();  
         });
     }
     static deleteUserObjTrash = function(btnDelete,selfMatricule){
@@ -466,14 +523,447 @@ class userObjUITrash{
                 for(let i = index1;i<userObj.matriculeArr.length;i++){
                     if(i!=userObj.matriculeArr.length-1){
                         [userObj.matriculeArr[i+1] , userObj.matriculeArr[i]] = [userObj.matriculeArr[i] , userObj.matriculeArr[i+1]];
+                        [userObj.userNameArr[i+1] , userObj.userNameArr[i]] = [userObj.userNameArr[i] , userObj.userNameArr[i+1]];
                     }
                 }
+                userObj.userNameArr.pop();
                 userObj.matriculeArr.pop();
+
+                localStorage.setItem('userNameArr',JSON.stringify(userObj.userNameArr));
                 localStorage.setItem('matriculeArr',JSON.stringify(userObj.matriculeArr));
-                console.log(selfMatricule);
+
                 container.remove();
                 btnTrash.click();
             }
         });
+    }
+}
+// class userObjUIArchive
+class userObjUIFilter{  
+    static arrUserObjUIFilter = [];
+    static userObjFilter = function(){
+        const accountBox = document.querySelector('body #container .areaFilter > .wrapper > .accountBox');
+        const accountBoxLength = accountBox.childElementCount; 
+        for(let i = accountBoxLength-1;i>=0;i--){
+            accountBox.children[i].remove();
+        }
+        userObjUIFilter.arrUserObjUIFilter = [...userObjUI.arrUserObj,...userObjUIArchive.arrUserObjArchive,...userObjUITrash.arrUserObjTrash];
+        userObjUIFilter.arrUserObjUIFilter.forEach(function(value,index){
+            userObjUIFilter.displayUserObjFilter(value);
+        });
+    }
+    static displayUserObjFilter = function(self){
+        const accountBox = document.querySelector('body #container .areaFilter > .wrapper > .accountBox');
+        let boxPerson = ''; 
+        let bool = false;
+        for(let i =0;i<userObjUI.arrUserObj.length;i++){
+            if(self.matricule == userObjUI.arrUserObj[i].matricule){
+                boxPerson = boxPersonUserObjUI(self);
+                bool = true;
+                break;
+            }
+        }
+        if(bool != true){
+            for(let i =0;i<userObjUIArchive.arrUserObjArchive.length;i++){
+                if(self.matricule == userObjUIArchive.arrUserObjArchive[i].matricule){
+                    boxPerson = boxPersonUserObjUIArchive(self);
+                    bool = true;
+                    break;
+                }
+            }
+        }
+        if(bool != true){
+            for(let i =0;i<userObjUITrash.arrUserObjTrash.length;i++){
+                if(self.matricule == userObjUITrash.arrUserObjTrash[i].matricule){
+                    boxPerson = boxPersonUserObjUITrash(self);
+                    break;
+                }
+            }    
+        }
+        function boxPersonUserObjUI(self){
+            const boxPerson = document.createElement('div');
+            boxPerson.className = 'boxPerson';
+            boxPerson.innerHTML = `
+            <div class="headerPerson">                                                           
+                <img src="${self.imgSrc}" alt="person profile">                                  
+                <div class="infoPerson">                                                         
+                    <h5>${self.firstname} ${self.lastname}</h5>
+                    <span>${self.selectMembership}</span><i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+            <div class="discriptionPerson">
+            <span class="titleProduct">${self.titleProduct}</span>
+                <span class="departmentType">${self.selectDepartmentype}</span>
+                <p class="info">${self.discription}</p>
+                </div>
+                <div class="buttonEditePerson">                                              
+                <div class="archives-Trash-button">                                      
+                    <input type="button" title="Archive" class="btnArchive"  value="Archive"><input type="button" title="Delete" class="btnDelete" value="Delete">
+                    </div>
+                    <input type="button" title="Edite" class="btnEdite" value="Edite">
+                    </div>`;
+            boxPerson.matricule = self.matricule; 
+            accountBox.insertBefore(boxPerson,accountBox.children[0]);
+            userObjUI.editeUserObj(boxPerson.querySelector('.buttonEditePerson .btnEdite'),boxPerson.matricule,boxPerson);
+            userObjUI.archiveUserObj(boxPerson.querySelector('.buttonEditePerson .archives-Trash-button .btnArchive'),boxPerson.matricule);
+            userObjUI.deleteUserObj(boxPerson.querySelector('.buttonEditePerson .archives-Trash-button .btnDelete'),boxPerson.matricule);
+
+        }
+        function boxPersonUserObjUIArchive(self){
+            const boxPerson = document.createElement('div');
+            boxPerson.className = 'boxPerson';
+            boxPerson.innerHTML = `
+                <div class="headerPerson">                                                           
+                    <img src="${self.imgSrc}" alt="person profile">                                  
+                    <div class="infoPerson">                                                         
+                        <h5>${self.firstname} ${self.lastname}</h5>
+                        <span>${self.selectMembership}</span><i class="fa-solid fa-circle-check"></i>
+                    </div>
+                </div>
+                <div class="discriptionPerson">
+                <span class="titleProduct">${self.titleProduct}</span>
+                    <span class="departmentType">${self.selectDepartmentype}</span>
+                    <p class="info">${self.discription}</p>
+                    </div>
+                    <div class="buttonEditePerson">                                              
+                    <div class="archives-Trash-button">                                      
+                        <input type="button" title="home" class="btnArchive"  value="Home"><input type="button" title="Delete" class="btnDelete" value="Delete">
+                        </div>
+                        <input type="button" title="Edite" class="btnEdite" value="Edite">
+                        </div>`;
+            boxPerson.matricule = self.matricule; 
+            accountBox.insertBefore(boxPerson,accountBox.children[0]);
+            userObjUIArchive.editeUserObj(boxPerson.querySelector('.buttonEditePerson .btnEdite'),boxPerson.matricule,boxPerson);
+            
+            userObjUIArchive.moveUserObjHome(boxPerson.querySelector('.buttonEditePerson .btnArchive'),boxPerson.matricule);
+            userObjUIArchive.moveUserObjTrash(boxPerson.querySelector('.buttonEditePerson .btnDelete'),boxPerson.matricule);
+        }
+        function boxPersonUserObjUITrash(){
+            const boxPerson = document.createElement('div');
+            boxPerson.className = 'boxPerson';
+            boxPerson.innerHTML = `
+            <div class="headerPerson">                                                           
+                <img src="${self.imgSrc}" alt="person profile">                                  
+                <div class="infoPerson">                                                         
+                    <h5>${self.firstname} ${self.lastname}</h5>
+                    <span>${self.selectMembership}</span><i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+            <div class="discriptionPerson">
+            <span class="titleProduct">${self.titleProduct}</span>
+                <span class="departmentType">${self.selectDepartmentype}</span>
+                <p class="info">${self.discription}</p>
+                </div>
+                <div class="buttonEditePerson">                                              
+                <div class="archives-Trash-button">                                      
+                    <input type="button" title="Restore" class="btnRestore"  value="Restore"><input type="button" title="Delete" class="btnDelete" value="Delete" style="background-color:rgba(27, 188, 155, 0.5);cursor: not-allowed;">
+                    </div>
+                    <input type="button" title="Edite" class="btnEdite" value="Edite" style="background-color: #ffa50082;width: 100%;margin-top: 10px;cursor: not-allowed;display: block;">
+                    </div>`;
+            boxPerson.matricule = self.matricule; 
+            accountBox.insertBefore(boxPerson,accountBox.children[0]); 
+            userObjUITrash.restoreUserObjTrash(boxPerson.querySelector('.buttonEditePerson .archives-Trash-button .btnRestore'),boxPerson.matricule);
+        }
+    }
+
+    static userObjFilterAccountType0 = function(inpRadio){
+        inpRadio.onclick = function(){
+            userObjUIFilter.userObjFilter();      
+        }
+    }
+    static userObjFilterAccountType1 = function(inpRadio){
+
+        inpRadio.onclick = function(){
+            const accountBox = document.querySelector('body #container .areaFilter > .wrapper > .accountBox');
+            const accountBoxLength = accountBox.childElementCount; 
+            for(let i = accountBoxLength-1;i>=0;i--){
+                accountBox.children[i].remove();
+            }
+            
+            const arrNew = [];
+            for(let i =0;i<userObjUIFilter.arrUserObjUIFilter.length;i++){
+                if(userObjUIFilter.arrUserObjUIFilter[i].selectMembership == 'platinum'){
+                    arrNew.push(userObjUIFilter.arrUserObjUIFilter[i]);
+                }
+            }      
+            arrNew.forEach(function(value){
+                userObjUIFilter.displayUserObjFilter(value);
+            });
+        }
+    }
+    static userObjFilterAccountType2 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const accountBox = document.querySelector('body #container .areaFilter > .wrapper > .accountBox');
+            const accountBoxLength = accountBox.childElementCount; 
+            for(let i = accountBoxLength-1;i>=0;i--){
+                accountBox.children[i].remove();
+            }
+            
+            const arrNew = [];
+            for(let i =0;i<userObjUIFilter.arrUserObjUIFilter.length;i++){
+                if(userObjUIFilter.arrUserObjUIFilter[i].selectMembership == 'bronze'){
+                    arrNew.push(userObjUIFilter.arrUserObjUIFilter[i]);
+                }
+            }      
+            arrNew.forEach(function(value){
+                userObjUIFilter.displayUserObjFilter(value);
+            });
+        }
+    }
+    static userObjFilterCreateDate0 = function(inpRadio){
+        inpRadio.onclick = function(){
+            userObjUIFilter.userObjFilter();      
+        }
+    }
+    static userObjFilterCreateDate1 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) > Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        continue;
+                    }
+                    else if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) < Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) == Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) > Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            continue;
+                        }
+                        else if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) < Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                            continue;
+                        }
+                        else if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) == Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) > Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                continue;
+                            }
+                            else if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) < Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                continue;
+                            }
+                            else if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) == Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) > Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    continue;
+                                }
+                                else if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) < Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                    continue;
+                                }   
+                                else if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) == Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) > Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        continue;
+                                    }
+                                    else if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) < Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                        continue;
+                                    }
+                                    else if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) == Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        if(Number(arrNew[i].dateAndTimeCreate.slice(19,21)) > Number(arrNew[x].dateAndTimeCreate.slice(19,21))){
+                                            continue;
+                                        }
+                                        else if(Number(arrNew[i].dateAndTimeCreate.slice(19,21)) < Number(arrNew[x].dateAndTimeCreate.slice(19,21))){
+                                            [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                            continue;
+                                        }
+                                        else{continue;}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
+        }  
+    }
+    static userObjFilterCreateDate2 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) > Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) < Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        continue;
+                    }
+                    else if(Number(arrNew[i].dateAndTimeCreate.slice(0,4)) == Number(arrNew[x].dateAndTimeCreate.slice(0,4))){
+                        if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) > Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                            continue;
+                        }
+                        else if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) < Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            continue;
+                        }
+                        else if(Number(arrNew[i].dateAndTimeCreate.slice(5,7)) == Number(arrNew[x].dateAndTimeCreate.slice(5,7))){
+                            if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) > Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                continue;
+                            }
+                            else if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) < Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                continue;
+                            }
+                            else if(Number(arrNew[i].dateAndTimeCreate.slice(8,10)) == Number(arrNew[x].dateAndTimeCreate.slice(8,10))){
+                                if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) > Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                    continue;
+                                }
+                                else if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) < Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    continue;
+                                }   
+                                else if(Number(arrNew[i].dateAndTimeCreate.slice(13,15)) == Number(arrNew[x].dateAndTimeCreate.slice(13,15))){
+                                    if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) > Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                        continue;
+                                    }
+                                    else if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) < Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        continue;
+                                    }
+                                    else if(Number(arrNew[i].dateAndTimeCreate.slice(16,18)) == Number(arrNew[x].dateAndTimeCreate.slice(16,18))){
+                                        if(Number(arrNew[i].dateAndTimeCreate.slice(19,21)) > Number(arrNew[x].dateAndTimeCreate.slice(19,21))){
+                                            [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                                            continue;
+                                        }
+                                        else if(Number(arrNew[i].dateAndTimeCreate.slice(19,21)) < Number(arrNew[x].dateAndTimeCreate.slice(19,21))){
+                                            continue;
+                                        }
+                                        else{continue;}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
+        }  
+    }
+    static userObjFilterNameFilter0 = function(inpRadio){
+        inpRadio.onclick = function(){
+            userObjUIFilter.userObjFilter();  
+        }
+    }
+    static userObjFilterNameFilter1 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if((arrNew[i].firstname+arrNew[i].lastname).toLowerCase()>(arrNew[x].firstname+arrNew[x].lastname).toLowerCase()){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if((arrNew[i].firstname+arrNew[i].lastname).toLowerCase()<(arrNew[x].firstname+arrNew[x].lastname).toLowerCase()){
+                        continue;
+                    }
+                }    
+            } 
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
+        }
+    }
+    static userObjFilterNameFilter2 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if((arrNew[i].firstname+arrNew[i].lastname).toLowerCase()<(arrNew[x].firstname+arrNew[x].lastname).toLowerCase()){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if((arrNew[i].firstname+arrNew[i].lastname).toLowerCase()>(arrNew[x].firstname+arrNew[x].lastname).toLowerCase()){
+                        continue;
+                    }
+                }    
+            } 
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
+        }
+    }
+    static userObjFilterPrice0 = function(inpRadio){
+        inpRadio.onclick = function(){
+            userObjUIFilter.userObjFilter();  
+        }
+    }
+    static userObjFilterPrice1 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if(Number(arrNew[i].price.slice(0,arrNew[i].price.length-1))>Number(arrNew[x].price.slice(0,arrNew[x].price.length-1))){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if(Number(arrNew[i].price.slice(0,arrNew[i].price.length-1))<Number(arrNew[x].price.slice(0,arrNew[x].price.length-1))){
+                        continue;
+                    }
+                }    
+            } 
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
+        }
+    }
+    static userObjFilterPrice2 = function(inpRadio){
+        inpRadio.onclick = function(){
+            const arrNew =  userObjUIFilter.arrUserObjUIFilter;
+            for(let i = 0;i<arrNew.length-1;i++){
+                for(let x = i+1;x<arrNew.length;x++){
+                    if(Number(arrNew[i].price.slice(0,arrNew[i].price.length-1))<Number(arrNew[x].price.slice(0,arrNew[x].price.length-1))){
+                        [arrNew[x],arrNew[i]]=[arrNew[i],arrNew[x]];
+                        continue;
+                    }
+                    else if(Number(arrNew[i].price.slice(0,arrNew[i].price.length-1))>Number(arrNew[x].price.slice(0,arrNew[x].price.length-1))){
+                        continue;
+                    }
+                }    
+            }
+            userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);            
+        }
+    }
+    static userObjFilterRemoveAndDisplaySetOrderChildren = function(arrNew){
+        const accountBox = document.querySelector('body #container .areaFilter > .wrapper > .accountBox');
+        const accountBoxLength = accountBox.childElementCount; 
+        for(let i = accountBoxLength-1;i>=0;i--){
+            accountBox.children[i].remove();
+        }
+        arrNew.forEach(function(value){
+            userObjUIFilter.displayUserObjFilter(value);
+        })   
+        let order = 0;
+        for(let i = arrNew.length-1;i>=0;i--){
+            accountBox.children[i].style.setProperty('order',`${++order}`);
+        };
+    }
+    static makeSure = function(){
+        const areaFilter = document.querySelector('body #container .areaFilter');
+        function clickSecond(typeFilterChild){
+            for(let i = 0;i<typeFilterChild.childElementCount;i++){
+                if(typeFilterChild.children[i].children[1].checked == true){
+                    typeFilterChild.children[i].children[1].click();
+                    break;
+                }
+            }
+        }
+        if(areaFilter.classList.contains('active') == false){
+            const typeFilter = areaFilter.querySelector('.wrapper .typeFilter'); 
+            let typeFilterChild = '';
+            switch(typeFilter.children[0].className){
+                case 'accountType' :
+                    typeFilterChild = areaFilter.querySelector(`.wrapper .typeFilter .accountType ul`);
+                    clickSecond(typeFilterChild);
+                    break;
+                case 'createDate' :
+                    typeFilterChild = areaFilter.querySelector(`.wrapper .typeFilter .createDate ul`);
+                    clickSecond(typeFilterChild);
+                    break;
+                case 'nameFilter' :
+                    typeFilterChild = areaFilter.querySelector(`.wrapper .typeFilter .nameFilter ul`);
+                    clickSecond(typeFilterChild);
+                    break;
+                case 'price' :
+                    typeFilterChild = areaFilter.querySelector(`.wrapper .typeFilter .price ul`);
+                    clickSecond(typeFilterChild);
+                    break;
+            }
+        }
     }
 }
