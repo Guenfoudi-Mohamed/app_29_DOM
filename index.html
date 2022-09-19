@@ -19,16 +19,16 @@
                 </div>
                 <!-- account Filter -->
                 <div class="accountFilter">
-                    <div class="logoCustomize"><a class="sliderControle" title="Customize"><i class="fa-solid fa-sliders"></i></a><label>Customize</label></div>
-                    <ul class="filterBoxs">
-                        <li class="box b0">account type</li>
-                        <li class="box b1">created date</li>
-                        <li class="box b2">name filter</li>
-                        <li class="box b3">price</li>
+                    <div class="logoCustomize" title="Customize"><a class="sliderControle" title="Customize"><i class="fa-solid fa-sliders"></i></a><label>Customize</label></div>
+                    <ul class="filterBoxs active" >
+                        <li class="box b0" title="account type"><a href="#">account type</a></li>
+                        <li class="box b1" title="created date"><a href="#">created date</a></li>
+                        <li class="box b2" title="name filter"><a href="#">name filter</a></li>
+                        <li class="box b3" title="price"><a href="#">price</a></li>
                     </ul>
                 </div>
                 <!-- box account -->
-                <div class="accountBox">
+                <div class="accountBox Home">
                     <!-- boxPerson0 -->
                     <!-- <div class="boxPerson">
                         <div class="headerPerson">
@@ -58,6 +58,7 @@
                     <a class="closePopUpAddAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
                     <input type="text" placeholder="First Name" class="firstName" focus autofocus>
                     <input type="text" placeholder="Last Name" class="lastName">
+                    <input type="text" placeholder="User Name" class="userName">
                     <div class="uploadProfile" title="upload">
                         <div class="imgUpload">
                             <a href="#" class="linkUpload l0"><i class="fa fa-2x fa-camera"></i></a>
@@ -77,7 +78,8 @@
                         <option>web dev</option>
                         <option>mobile dev</option>
                     </select>
-                    <input type="text" placeholder=" title Product" class="titleProduct">            
+                    <input type="text" placeholder=" title Product" class="titleProduct">
+                    <input type="text" placeholder="price" maxlength="6" class="price">             
                     <select class="selct s2">
                         <option selected disabled>Department Type</option>
                         <option>frontend developer</option>
@@ -87,7 +89,7 @@
                     <input type="button" class="btnCreate" title="Create" value="Create">
                 </div>
             </div>
-            <!-- popUpAddAccount -->
+            <!-- popUpUpdateAccount -->
             <div class="popUp popUpUpdateAccount">
                 <div class="form">
                     <a class="closePopUpUpdateAccount" title="Close Form"><i class="fa-solid fa-xmark"></i></a>
@@ -112,7 +114,8 @@
                         <option>web dev</option>
                         <option>mobile dev</option>
                     </select>
-                    <input type="text" placeholder=" title Product" class="titleProduct">            
+                    <input type="text" placeholder=" title Product" class="titleProduct">
+                    <input type="text" placeholder="price" maxlength="6" class="price">            
                     <select class="selct s2">
                         <option selected disabled>Department Type</option>
                         <option>frontend developer</option>
@@ -125,15 +128,55 @@
             <!-- area Archives -->
             <div class="areaArchives active">
                 <div class="wrapper" data-text="Archives">
-                    <a class="close-area-archives" title="Close area Archives"><i class="fa-solid fa-xmark"></i></a>
-                    <div class="accountBox"></div>
+                    <a class="close-area-archives"  title="Close area Archives"><i class="fa-solid fa-xmark"></i></a>
+                    <div class="accountBox Archives"></div>
                 </div>
             </div>
             <!-- area trash -->
             <div class="areaTrash active">
                 <div class="wrapper" data-text="Trash">
                     <a class="close-area-trash" title="Close area trash"><i class="fa-solid fa-xmark"></i></a>
-                    <div class="accountBox"></div>
+                    <div class="accountBox Trash"></div>
+                </div>
+            </div>
+            <!-- area filter -->
+            <div class="areaFilter active">
+                <div class="wrapper" data-text="Filter">
+                    <a class="close-area-filter" title="Close area filter"><i class="fa-solid fa-xmark"></i></a>
+                    <div class="typeFilter">
+                        <!-- account type -->
+                        <!-- <div class="accountType">
+                            <ul>
+                                <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio1">platinum</label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio2">bronze</label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
+                            </ul> 
+                        </div> -->
+                        <!-- create Date -->
+                        <!-- <div class="createDate">
+                            <ul>
+                                <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio1">nTOo<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio2">oTOn<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
+                            </ul>
+                        </div> -->
+                        <!-- name filter -->
+                        <!-- <div class="nameFilter">
+                            <ul>
+                                <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio1">aTOz<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio2">zTOa<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
+                            </ul>
+                        </div> -->
+                        <!-- <div class="price">
+                            <ul>
+                                <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio1">eTOc<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
+                                <li><label for="accountTypeRadio2">cTOe<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <div class="accountBox Filter" ></div>
                 </div>
             </div>
         </div>
