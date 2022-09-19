@@ -2,7 +2,7 @@
 *{margin: 0px;padding: 0px;outline: none;text-decoration: none;list-style: none;box-sizing: border-box;}
 :is(::after,::before){margin: 0px;padding: 0px;box-sizing: border-box;}
 /* :root{--widthCircle:80px;--leftMove:0px;--topMove:0px;} */
-html, body{height: 100%;font-family: Arial, Helvetica, sans-serif;}
+html, body{height: 100%;width:100%;font-family: Arial, Helvetica, sans-serif;}
 body #container{width: 100%;height:inherit;}
 /* start headerButtons */
 body #container > .wrapper{width: 100%;height:inherit;max-width: 1200px;margin: 0px auto;padding-top: 50px;}
@@ -13,10 +13,13 @@ body #container .wrapper .headerButtons :is(input.btnAddAccount, .archives-Trash
 body #container .wrapper .headerButtons .archives-Trash-button input:nth-child(1){background-color: rgb(27,188,155);}
 body #container .wrapper .headerButtons .archives-Trash-button input:nth-child(2){background-color: rgb(232,76,61);margin-left: 20px;}
 /* start accountFilter */
-body #container .wrapper .accountFilter .logoCustomize{display: flex;align-items: center;}
-body #container .wrapper .accountFilter .logoCustomize .sliderControle{color: #000;border: 2px solid #000;border-radius:5px;padding:0px 2.5px;font-weight: bold;font-size: 17px;margin-right: 5px;cursor: pointer;}
+body #container .wrapper .accountFilter .logoCustomize{display: flex;align-items: center;width: fit-content;}
+body #container .wrapper .accountFilter .logoCustomize .sliderControle{color: #000;border: 2px solid #000;border-radius:5px;padding:0px 2.5px;font-weight: bold;font-size: 17px;margin-right: 5px;}
+body #container .wrapper .accountFilter :is(.logoCustomize, .logoCustomize :is(.sliderControle, label)){cursor: pointer;}
 body #container .wrapper .accountFilter .filterBoxs{display: flex;gap:33.34px;align-items: center;justify-content: center;flex-wrap: wrap; margin: 15px 0px 45px 0px;}
-body #container .wrapper .accountFilter .filterBoxs .box{background-color:rgb(236,240,241);color: rgb(74, 74, 74);font-size: 18px; padding: 5px 0px 5px 15px;border-radius: 5px;min-width: 275px;}
+body #container .wrapper .accountFilter .filterBoxs.active{margin: 0px;visibility: hidden;}
+body #container .wrapper .accountFilter .filterBoxs .box{background-color:rgb(236,240,241);color: rgb(74, 74, 74);font-size: 18px; padding: 5px 0px 5px 15px;border-radius: 5px;min-width: 275px;cursor: pointer;}
+body #container .wrapper .accountFilter .filterBoxs .box > a{color: #000;}
 /* start accountBox */
 body #container .wrapper .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 30px;}
 body #container .wrapper .accountBox .boxPerson{max-width: 275px;width: 100%;}
@@ -37,11 +40,12 @@ body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-Tra
 body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(1){background-color: rgb(53,152,219);}
 body #container .wrapper .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(2){background-color: rgb(27,188,155);float: right;}
 body #container .wrapper .accountBox .boxPerson .buttonEditePerson .btnEdite{background-color: orange;width: 100%;margin-top: 10px;}
+
 /* start popUpAddAccount */
-body #container .popUpAddAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .4);display:none;}
+body #container .popUpAddAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .6);display:none;}
 body #container .popUpAddAccount.active{display:flex;}
     /* start form addAccount */
-body #container .popUpAddAccount .form{margin: auto;width: 270px;background-color:rgb(52,73,94);padding:30px 15px;position: relative;}
+body #container .popUpAddAccount .form{margin: auto;width: 280px;background-color:rgb(52,73,94);padding:25px 15px;position: relative;}
 body #container .popUpAddAccount .form .closePopUpAddAccount{position: absolute;font-size: 20px;top: 0px;right:-25px;color: #fff;cursor: pointer;}
 body #container .popUpAddAccount .form .closePopUpAddAccount i{display: block;}
 body #container .popUpAddAccount .form :is(input, select){border: none;border-radius: 3px;}
@@ -60,8 +64,9 @@ body #container .popUpAddAccount .form > input{display: block;width: 100%;paddin
 body #container .popUpAddAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;background-color: #fff;}
 body #container .popUpAddAccount .form textarea{resize: none;width: 100%;max-height: 60px;margin-top: 15px;padding: 5px;text-indent: 15px;}
 body #container .popUpAddAccount .form input:last-child{cursor: pointer;background-color: rgb(27,188,155);}
+
 /* start popUpupDateAccount */
-body #container .popUpUpdateAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .4);display: none;}
+body #container .popUpUpdateAccount{position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;min-height:100vh;background-color: rgb(0, 0, 0, .6);display: none;z-index: 3;}
 body #container .popUpUpdateAccount.active{display:flex;}
     /* start form upDate Account */
 body #container .popUpUpdateAccount .form{margin: auto;width: 270px;background-color:rgb(52,73,94);padding:30px 15px;position: relative;}
@@ -83,14 +88,15 @@ body #container .popUpUpdateAccount .form > input{display: block;width: 100%;pad
 body #container .popUpUpdateAccount .form select{margin-top: 15px;display: block;width: 100%;padding: 5px;background-color: #fff;}
 body #container .popUpUpdateAccount .form textarea{resize: none;width: 100%;max-height: 60px;margin-top: 15px;padding: 5px;text-indent: 15px;}
 body #container .popUpUpdateAccount .form input:last-child{cursor: pointer;background-color: rgb(27,188,155);}
+
 /* start areaArchives */
 body #container .areaArchives{height: 100%;width: 100%;background: rgba(0, 0, 0, 0.5);padding:33.34px 0px;margin: 0px auto;position: fixed;top: 0px;display: flex;}
 body #container .areaArchives.active{display: none;}
 body #container .areaArchives > .wrapper{max-width: 1301px;width: 100%;min-height: calc(408px + calc(33.34px * 2));max-height: calc(408px + calc(33.34px * 2));position: relative;padding: 0px;margin: auto;background-color: rgb(255, 255, 255);}
-body #container .areaArchives > .wrapper::after{content: attr(data-text);position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 10em;color: rgba(0, 0, 0, .1);}
+body #container .areaArchives > .wrapper::before{content: attr(data-text);position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 10em;color: rgba(0, 0, 0, .1);}
 body #container .areaArchives > .wrapper .close-area-archives{position: absolute;font-size: 20px;top: 0px;right: -25px;color: #fff;cursor: pointer;display: block;}
 body #container .areaArchives > .wrapper .close-area-archives i{display: block;}
-body #container .areaArchives > .wrapper > .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;}
+body #container .areaArchives > .wrapper > .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;position: relative;z-index: 2;}
 body #container .areaArchives > .wrapper > .accountBox .boxPerson{max-width: 275px;width: 100%;scroll-snap-align: center;}
 body #container .areaArchives > .wrapper > .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: flex-start; background-color:rgb(236,240,241);border-radius: 7px;}
 body #container .areaArchives > .wrapper > .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
@@ -108,14 +114,15 @@ body #container .areaArchives > .wrapper > .accountBox .boxPerson .buttonEditePe
 body #container .areaArchives > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(1){background-color: rgb(53,152,219);}
 body #container .areaArchives > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(2){background-color: rgb(27,188,155);float: right;}
 body #container .areaArchives > .wrapper > .accountBox .boxPerson .buttonEditePerson .btnEdite{background-color: orange;width: 100%;margin-top: 10px;}
+
 /* start areaTrash */
 body #container .areaTrash{height: 100%;width: 100%;background: rgba(0, 0, 0, 0.5);padding:33.34px 0px;margin: 0px auto;position: fixed;top: 0px;display: flex;}
 body #container .areaTrash.active{display: none;}
 body #container .areaTrash > .wrapper{max-width: 1301px;width: 100%;min-height: calc(408px + calc(33.34px * 2));max-height: calc(408px + calc(33.34px * 2));position: relative;padding: 0px;margin: auto;background-color: rgb(255, 255, 255);}
-body #container .areaTrash > .wrapper::after{content: attr(data-text);position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 10em;color: rgba(0, 0, 0, .1);}
+body #container .areaTrash > .wrapper::before{content: attr(data-text);position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 10em;color: rgba(0, 0, 0, .1);}
 body #container .areaTrash > .wrapper .close-area-trash{position: absolute;font-size: 20px;top: 0px;right: -25px;color: #fff;cursor: pointer;display: block;}
 body #container .areaTrash > .wrapper .close-area-trash i{display: block;}
-body #container .areaTrash > .wrapper > .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;}
+body #container .areaTrash > .wrapper > .accountBox{display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;position: relative;z-index: 2;}
 body #container .areaTrash > .wrapper > .accountBox .boxPerson{max-width: 275px;width: 100%;scroll-snap-align: center;}
 body #container .areaTrash > .wrapper > .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: flex-start; background-color:rgb(236,240,241);border-radius: 7px;}
 body #container .areaTrash > .wrapper > .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
@@ -133,6 +140,42 @@ body #container .areaTrash > .wrapper > .accountBox .boxPerson .buttonEditePerso
 body #container .areaTrash > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(1){background-color: rgb(53,152,219);}
 body #container .areaTrash > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(2){background-color: rgb(27,188,155);float: right;}
 body #container .areaTrash > .wrapper > .accountBox .boxPerson .buttonEditePerson .btnEdite{background-color: #ffa50082;width: 100%;margin-top: 10px;cursor: not-allowed;display: block;}
+
+/* start areaFilter */
+body #container .areaFilter{height: 100%;width: 100%;background: rgba(0, 0, 0, 0.5);padding:33.34px 0px;margin: 0px auto;position: fixed;top: 0px;display: flex;z-index: 2;}
+body #container .areaFilter.active{display: none;}
+body #container .areaFilter > .wrapper{max-width: 1301px;width: 100%;min-height: calc(408px + calc(33.34px * 2));position: relative;padding: 0px;margin: auto;background-color: rgb(255, 255, 255);}
+body #container .areaFilter > .wrapper::before{content: attr(data-text);position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 10em;color: rgba(0, 0, 0, .1);z-index: 1;}
+body #container .areaFilter > .wrapper .close-area-filter{position: absolute;font-size: 20px;top: 0px;right: -25px;color: #fff;cursor: pointer;display: block;}
+body #container .areaFilter > .wrapper .close-area-filter i{display: block;}
+
+/* body #container .areaFilter > .wrapper .typeFilter{display: none;} */
+    /* start typeFilter */
+body #container .areaFilter > .wrapper .typeFilter ul {display: flex;justify-content: center;align-items: center;margin: 15px auto;}
+body #container .areaFilter > .wrapper .typeFilter ul li{margin: 0px 15px; font-weight: bold;font-size:17px;}
+body #container .areaFilter > .wrapper .typeFilter ul li input{cursor: pointer;}
+body #container .areaFilter > .wrapper .typeFilter ul li label{margin-right:5px;cursor: pointer;color: #000;}
+body #container .areaFilter > .wrapper .typeFilter ul li:nth-child(1) label{color:#919191;}
+body #container .areaFilter > .wrapper .typeFilter ul li label i{margin: 0px 5px;}
+    /* end typeFilter */
+body #container .areaFilter > .wrapper > .accountBox{background-color: #d9d9d92e;display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;position: relative;z-index: 2;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson{max-width: 275px;width: 100%;scroll-snap-align: center;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .headerPerson{padding: 7.5px 15px; display: flex;align-items:center;justify-content: flex-start; background-color:rgb(236,240,241);border-radius: 7px;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .headerPerson > img{width: 60px;height:60px;border-radius: 50%;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .headerPerson .infoPerson{margin-left: 30px;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .headerPerson .infoPerson h5{margin-top: 5px;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .headerPerson .infoPerson span{margin-right:5px;color: orange;}
+    /* start discriptionPerson */
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .discriptionPerson{margin: 15px 0px;background-color: rgb(52,73,94);padding: 15px;border-radius: 7px;min-height: 220px;max-height: 220px;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .discriptionPerson :is(.titleProduct, .info){color: #fff;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .discriptionPerson .departmentType{margin: 5px 0px;color: green;display: block;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .discriptionPerson .info{max-height: 140px;overflow: hidden;word-wrap: break-word;}
+    /* start discriptionPerson */
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .buttonEditePerson :is(.archives-Trash-button input, .archives-Trash-button + .btnEdite){color: #fff;border: none;border-radius: 7px;padding: 10px;font-weight: bold;}    
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input{width: 48%;cursor: pointer;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(1){background-color: rgb(53,152,219);}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .buttonEditePerson .archives-Trash-button input:nth-child(2){background-color: rgb(27,188,155);float: right;}
+body #container .areaFilter > .wrapper > .accountBox .boxPerson .buttonEditePerson .btnEdite{background-color: #ffa600;width: 100%;margin-top: 10px;display: block;}
 
 /* start popUp delete account */
 body #containerDeleteAccount{width: 100%;height: 100%; background: rgba(0, 0, 0, 0.5);padding:33.34px 0px;margin: 0px auto;position: fixed;top: 0px;display: flex;z-index: 3;}
