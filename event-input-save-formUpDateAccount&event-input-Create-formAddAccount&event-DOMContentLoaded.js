@@ -72,18 +72,14 @@ const inpUserName = document.querySelector('body #container .popUpAddAccount .fo
 inpUserName.addEventListener('keyup',validInpUserName);
 function validInpUserName(){
 
-    let conteur = 1;
+    inpUserName.value = inpUserName.value.trim();
+
+    let conteur = 0;
     if(inpUserName.value.length > 6){
         conteur++;
     }
-    // for(let i =0;i<inpUserName.value.length;i++){   
-    //     if(inpUserName.value[i].toUpperCase()){
-    //         conteur++;
-    //         break;
-    //     }
-    // }
+    
     let con = 0;
-
     for(let i = 0;i<userObj.userNameArr.length;i++){
         if(inpUserName.value.trim() == userObj.userNameArr[i]){
             conteur = 0;
@@ -94,7 +90,38 @@ function validInpUserName(){
         }
     }
     if(con == userObj.userNameArr.length){conteur++;}
-    if(inpUserName.value.trim() == inpUserName.previousElementSibling.value || inpUserName.value.trim() == inpUserName.previousElementSibling.previousElementSibling.value){conteur=0;}
+
+    if(inpUserName.value.toUpperCase() == inpUserName.previousElementSibling.value.toUpperCase() || inpUserName.value.toUpperCase() == inpUserName.previousElementSibling.previousElementSibling.value.toUpperCase()){conteur=0;}
+    
+    for(let i = 0;i<inpUserName.value.length;i++){
+        const charUpperCase = inpUserName.value[i];
+        if(charUpperCase.toUpperCase() === inpUserName.value[i]){
+            conteur++;
+            break;
+        }
+    }
+
+    const arrIndex = []; 
+    let bool = false;
+    let stockInpUserName = inpUserName.value;
+    for(let i = 0;i<inpUserName.value.length;i++){
+        if(inpUserName.value[i]== ' '){
+            arrIndex.push(i);  
+        }
+    }
+    inpUserName.value = '';
+    for(let i = 0;i<stockInpUserName.length;i++){
+        for(let x = 0;x<arrIndex.length;x++){
+            if(i == arrIndex[x]){
+                bool = true;
+                break;
+            }
+        }
+        if(bool){bool=false;continue;}
+        inpUserName.value += stockInpUserName[i];
+    };
+
+    
     switch(conteur){
         case 0:
         case 1:
@@ -166,12 +193,6 @@ btnSave.addEventListener('click',function(){
 
     userObjUIFilter.userObjFilter();
     userObjUIFilter.makeSure();
-
-
-    // const popUpAreaFilter = document.querySelector('body #container .areaFilter');
-    // if(popUpAreaFilter.hasAttribute('isAcive')){
-    //     popUpAreaFilter.classList.remove('active');
-    // };
 });
 
 
@@ -185,9 +206,9 @@ boxsFilter.forEach(function(value,index,arr){
             boxsFilter[index].onclick = function(){
                 areaFilter.classList.remove('active');
                 typeFilter.innerHTML =  
+                // <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>    
                 `<div class="accountType">
                     <ul>
-                        <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>    
                         <li><label for="accountTypeRadio1">platinum</label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
                         <li><label for="accountTypeRadio2">bronze</label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
                     </ul> 
@@ -197,32 +218,34 @@ boxsFilter.forEach(function(value,index,arr){
                 // userObjUIFilter.userObjFilterAccountType0(typeFilter.querySelector('.accountType li #accountTypeRadio0'));
                 userObjUIFilter.userObjFilterAccountType1(typeFilter.querySelector('.accountType li #accountTypeRadio1'));
                 userObjUIFilter.userObjFilterAccountType2(typeFilter.querySelector('.accountType li #accountTypeRadio2'));
+                typeFilter.querySelector('.accountType li #accountTypeRadio1').click();
             };
             break;
         case 1:
             boxsFilter[index].onclick = function(){
                 areaFilter.classList.remove('active');
                 typeFilter.innerHTML = 
+                // <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>
                 `<div class="createDate">
                     <ul>
-                        <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>
-                        <li><label for="accountTypeRadio1">nTOo<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
-                        <li><label for="accountTypeRadio2">oTOn<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
+                        <li><label for="accountTypeRadio1">NewToOld<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
+                        <li><label for="accountTypeRadio2">OldToNew<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
                     </ul>
                 </div>`;
                 userObjUIFilter.userObjFilter();
                 // userObjUIFilter.userObjFilterCreateDate0(typeFilter.querySelector('.createDate li #accountTypeRadio0'));
                 userObjUIFilter.userObjFilterCreateDate1(typeFilter.querySelector('.createDate li #accountTypeRadio1'));
                 userObjUIFilter.userObjFilterCreateDate2(typeFilter.querySelector('.createDate li #accountTypeRadio2'));
+                typeFilter.querySelector('.createDate li #accountTypeRadio1').click();
             };
             break;
         case 2:
             boxsFilter[index].onclick = function(){
                 areaFilter.classList.remove('active');
                 typeFilter.innerHTML = 
+                // <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>
                 `<div class="nameFilter">
                     <ul>
-                        <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0" type="radio" checked disabled name="accountTypeRadio"></li>
                         <li><label for="accountTypeRadio1">aTOz<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
                         <li><label for="accountTypeRadio2">zTOa<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
                     </ul>
@@ -231,15 +254,16 @@ boxsFilter.forEach(function(value,index,arr){
                 // userObjUIFilter.userObjFilterNameFilter0(typeFilter.querySelector('.nameFilter li #accountTypeRadio0'));
                 userObjUIFilter.userObjFilterNameFilter1(typeFilter.querySelector('.nameFilter li #accountTypeRadio1'));
                 userObjUIFilter.userObjFilterNameFilter2(typeFilter.querySelector('.nameFilter li #accountTypeRadio2'));
+                typeFilter.querySelector('.nameFilter li #accountTypeRadio1').click();
             };
             break;
         case 3:
             boxsFilter[index].onclick = function(){
                 areaFilter.classList.remove('active');
                 typeFilter.innerHTML = 
+                // <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0"  type="radio" checked disabled name="accountTypeRadio"></li>
                 `<div class="price">
                     <ul>
-                        <li><label for="accountTypeRadio0">all</label><input id="accountTypeRadio0"  type="radio" checked disabled name="accountTypeRadio"></li>
                         <li><label for="accountTypeRadio1">cTOe<i class="fa-solid fa-arrow-trend-up"></i></label><input id="accountTypeRadio1" type="radio" name="accountTypeRadio"></li>
                         <li><label for="accountTypeRadio2">eTOc<i class="fa-solid fa-arrow-trend-down"></i></label><input id="accountTypeRadio2" type="radio" name="accountTypeRadio"></li>
                     </ul>
@@ -248,6 +272,7 @@ boxsFilter.forEach(function(value,index,arr){
                 // userObjUIFilter.userObjFilterPrice0(typeFilter.querySelector('.price li #accountTypeRadio0'));
                 userObjUIFilter.userObjFilterPrice1(typeFilter.querySelector('.price li #accountTypeRadio1'));
                 userObjUIFilter.userObjFilterPrice2(typeFilter.querySelector('.price li #accountTypeRadio2'));
+                typeFilter.querySelector('.price li #accountTypeRadio1').click();
             };
             break;
     }
