@@ -155,7 +155,6 @@ body #container .areaFilter > .wrapper .typeFilter ul {display: flex;justify-con
 body #container .areaFilter > .wrapper .typeFilter ul li{margin: 0px 15px; font-weight: bold;font-size:17px;}
 body #container .areaFilter > .wrapper .typeFilter ul li input{cursor: pointer;}
 body #container .areaFilter > .wrapper .typeFilter ul li label{margin-right:5px;cursor: pointer;color: #000;}
-body #container .areaFilter > .wrapper .typeFilter ul li:nth-child(1) label{color:#919191;}
 body #container .areaFilter > .wrapper .typeFilter ul li label i{margin: 0px 5px;}
     /* end typeFilter */
 body #container .areaFilter > .wrapper > .accountBox{background-color: #d9d9d92e;display: flex;gap:33.34px;flex-wrap: wrap;margin-bottom: 0px;max-height: inherit;min-height: inherit;padding: 33.34px;overflow: hidden;overflow-y: scroll;scroll-snap-type: y mandatory;position: relative;z-index: 2;}
