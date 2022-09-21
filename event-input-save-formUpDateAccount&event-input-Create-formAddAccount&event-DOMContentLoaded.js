@@ -159,18 +159,19 @@ btnSave.addEventListener('click',function(){
     const price = document.querySelector('body #container .popUpUpdateAccount .form input.price').value+'$';
     const selectDepartmentype = document.querySelector('body #container .popUpUpdateAccount .form select.s2').value; 
     const discription = document.querySelector('body #container .popUpUpdateAccount .form textarea').value;
-    const matricule = this.matricule;
+
+    const matricule = userObj.Matricule;
     let accountBox = '';
 
-    if(btnSave.parentelement == 'accountBox Home'){
+    if(userObj.Parentelement == 'accountBox Home'){
         accountBox = document.querySelector('body #container .wrapper .accountBox.Home');
     }
-    else if(btnSave.parentelement == 'accountBox Archives'){
+    else if(userObj.Parentelement == 'accountBox Archives'){
         accountBox = document.querySelector('body #container .areaArchives > .wrapper > .accountBox.Archives');
     }
     
     for(let i = 0;i<accountBox.childElementCount;i++){
-        if(this.matricule == accountBox.children[i].matricule){
+        if(userObj.Matricule == accountBox.children[i].matricule){
             accountBox.children[i].querySelector('.headerPerson .infoPerson h5').textContent = `${firstname} ${lastname}`;
             accountBox.children[i].querySelector('.headerPerson > img').src = imgSrc;
             accountBox.children[i].querySelector('.headerPerson .infoPerson span').textContent = selectMembership;
@@ -182,12 +183,12 @@ btnSave.addEventListener('click',function(){
         }
     }
 
-    const dateAndTimeCreate = btnSave.dateAndTimeCreate;
-    const userName = btnSave.userName;
-    if(btnSave.parentelement == 'accountBox Home'){
+    const dateAndTimeCreate = userObj.dateAndTimeCreate;
+    const userName = userObj.userName;
+    if(userObj.Parentelement == 'accountBox Home'){
         userObjUI.upDateArrUserObj(matricule,{firstname:firstname,lastname:lastname,userName:userName,imgSrc:imgSrc,selectMembership:selectMembership,selectJob:selectJob,titleProduct:titleProduct,price:price,selectDepartmentype:selectDepartmentype,discription:discription,matricule:matricule,dateAndTimeCreate:dateAndTimeCreate});
     }
-    else if(btnSave.parentelement == 'accountBox Archives'){
+    else if(userObj.Parentelement == 'accountBox Archives'){
         userObjUIArchive.upDateArrUserObj(matricule,{firstname:firstname,lastname:lastname,userName:userName,imgSrc:imgSrc,selectMembership:selectMembership,selectJob:selectJob,titleProduct:titleProduct,price:price,selectDepartmentype:selectDepartmentype,discription:discription,matricule:matricule,dateAndTimeCreate:dateAndTimeCreate});
     }
 
