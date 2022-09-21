@@ -5,6 +5,12 @@
 class userObj{    
     static matriculeArr = [];
     static userNameArr = [];
+    
+    static Matricule = '';
+    static Parentelement = '';
+    static dateAndTimeCreate = '';
+    static userName = '';
+
     constructor(firstname,lastname,userName,imgSrc,selectMembership,selectJob,titleProduct,price,selectDepartmentype,discription,matricule,dateAndTimeCreate){
         this.firstname = firstname;
         this.lastname = lastname;
@@ -106,20 +112,14 @@ class userObjUI{
             document.querySelector('body #container .popUpUpdateAccount .form input.price').value = obj.price.slice(0,obj.price.length-1);
             document.querySelector('body #container .popUpUpdateAccount .form select.s2').value = obj.selectDepartmentype;
             document.querySelector('body #container .popUpUpdateAccount .form textarea').value = obj.discription;
-            const btnSave = document.querySelector('body #container .popUpUpdateAccount .form .btnSave');
-            btnSave.matricule = obj.matricule;
-            btnSave.parentelement = element.parentElement.className;
-            if(btnSave.parentelement == 'accountBox Filter'){
-                btnSave.parentelement = 'accountBox Home';
-            }
-            btnSave.dateAndTimeCreate = obj.dateAndTimeCreate;
-            btnSave.userName = obj.userName;
             
-            // const popUpAreaFilter = document.querySelector('body #container .areaFilter');
-            // if(popUpAreaFilter.classList.contains('active') == false){
-            //     popUpAreaFilter.classList.add('active');
-            //     popUpAreaFilter.setAttribute('isAcive','false');
-            // }
+            userObj.Matricule = obj.matricule;
+            userObj.Parentelement = element.parentElement.className; 
+            if(userObj.Parentelement == 'accountBox Filter'){
+                userObj.Parentelement = 'accountBox Home';
+            }
+            userObj.dateAndTimeCreate = obj.dateAndTimeCreate;
+            userObj.userName = obj.userName;
             
         });
     }
@@ -278,15 +278,14 @@ class userObjUIArchive{
             document.querySelector('body #container .popUpUpdateAccount .form input.price').value = obj.price.slice(0,obj.price.length-1);
             document.querySelector('body #container .popUpUpdateAccount .form select.s2').value = obj.selectDepartmentype;
             document.querySelector('body #container .popUpUpdateAccount .form textarea').value = obj.discription;
-            const btnSave = document.querySelector('body #container .popUpUpdateAccount .form .btnSave');
-            btnSave.matricule = obj.matricule;
-            btnSave.parentelement = element.parentElement.className;
-            if(btnSave.parentelement == 'accountBox Filter'){
-                btnSave.parentelement = 'accountBox Archives';
-            }
-            btnSave.dateAndTimeCreate = obj.dateAndTimeCreate;
-            btnSave.userName = obj.userName;
 
+            userObj.Matricule = obj.matricule;
+            userObj.Parentelement = element.parentElement.className; 
+            if(userObj.Parentelement == 'accountBox Filter'){
+                userObj.Parentelement = 'accountBox Archives';
+            }
+            userObj.dateAndTimeCreate = obj.dateAndTimeCreate;
+            userObj.userName = obj.userName;
         });
     }
     static upDateArrUserObj = function(selfMatricule,self){
@@ -634,7 +633,6 @@ class userObjUIFilter{
             boxPerson.matricule = self.matricule; 
             accountBox.insertBefore(boxPerson,accountBox.children[0]);
             userObjUIArchive.editeUserObj(boxPerson.querySelector('.buttonEditePerson .btnEdite'),boxPerson.matricule,boxPerson);
-            
             userObjUIArchive.moveUserObjHome(boxPerson.querySelector('.buttonEditePerson .btnArchive'),boxPerson.matricule);
             userObjUIArchive.moveUserObjTrash(boxPerson.querySelector('.buttonEditePerson .btnDelete'),boxPerson.matricule);
         }
@@ -666,11 +664,6 @@ class userObjUIFilter{
         }
     }
 
-    static userObjFilterAccountType0 = function(inpRadio){
-        inpRadio.onclick = function(){
-            userObjUIFilter.userObjFilter();      
-        }
-    }
     static userObjFilterAccountType1 = function(inpRadio){
 
         inpRadio.onclick = function(){
@@ -710,11 +703,7 @@ class userObjUIFilter{
             });
         }
     }
-    static userObjFilterCreateDate0 = function(inpRadio){
-        inpRadio.onclick = function(){
-            userObjUIFilter.userObjFilter();      
-        }
-    }
+
     static userObjFilterCreateDate1 = function(inpRadio){
         inpRadio.onclick = function(){
             const arrNew =  userObjUIFilter.arrUserObjUIFilter;
@@ -841,11 +830,7 @@ class userObjUIFilter{
             userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
         }  
     }
-    static userObjFilterNameFilter0 = function(inpRadio){
-        inpRadio.onclick = function(){
-            userObjUIFilter.userObjFilter();  
-        }
-    }
+    
     static userObjFilterNameFilter1 = function(inpRadio){
         inpRadio.onclick = function(){
             const arrNew =  userObjUIFilter.arrUserObjUIFilter;
@@ -880,11 +865,7 @@ class userObjUIFilter{
             userObjUIFilter.userObjFilterRemoveAndDisplaySetOrderChildren(arrNew);
         }
     }
-    static userObjFilterPrice0 = function(inpRadio){
-        inpRadio.onclick = function(){
-            userObjUIFilter.userObjFilter();  
-        }
-    }
+    
     static userObjFilterPrice1 = function(inpRadio){
         inpRadio.onclick = function(){
             const arrNew =  userObjUIFilter.arrUserObjUIFilter;
